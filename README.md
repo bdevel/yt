@@ -147,6 +147,13 @@ comment_thread.text_display #=> "funny video!"
 comment_thread.like_count #=> 9
 comment_thread.updated_at #=> 2016-03-22 12:56:56 UTC
 comment_thread.author_display_name #=> "Joe"
+
+if comment_thread.has_replies?
+  comment_thread.comments.each do |c|
+    c.text_display
+  end
+end
+
 ```
 
 Yt::Comment
