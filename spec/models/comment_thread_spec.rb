@@ -33,14 +33,20 @@ describe Yt::CommentThread do
   describe 'attributes from #top_level_comment delegations' do
     context 'with values' do
       let(:attrs) { {snippet: {"topLevelComment"=> {"id" => "xyz123", "snippet" => {
-        "textDisplay" => "funny video!",
+        "textDisplay" => "<b>funny video!</b>",
+        "textOriginal" => "*funny video!*",
         "authorDisplayName" => "fullscreen",
+        "authorChannelUrl"=>"http://www.youtube.com/channel/1234",
+        "authorChannelId"=>{"value"=>"1234"},
         "likeCount" => 99,
         "updatedAt" => "2016-03-22T12:56:56.3Z"}}}} }
 
       it { expect(comment_thread.top_level_comment.id).to eq 'xyz123' }
-      it { expect(comment_thread.text_display).to eq 'funny video!' }
+      it { expect(comment_thread.text_display).to eq '<b>funny video!</b>' }
+      it { expect(comment_thread.text_original).to eq '*funny video!*' }
       it { expect(comment_thread.author_display_name).to eq 'fullscreen' }
+      it { expect(comment_thread.author_channel_url).to eq 'http://www.youtube.com/channel/1234' }
+      it { expect(comment_thread.author_channel_id).to eq '1234' }
       it { expect(comment_thread.like_count).to eq 99 }
       it { expect(comment_thread.updated_at).to eq Time.parse('2016-03-22T12:56:56.3Z') }
     end
@@ -49,7 +55,10 @@ describe Yt::CommentThread do
       let(:attrs) { {snippet: {"topLevelComment"=> {"snippet" => {}}}} }
 
       it { expect(comment_thread.text_display).to be_nil }
+      it { expect(comment_thread.text_original).to be_nil }
       it { expect(comment_thread.author_display_name).to be_nil }
+      it { expect(comment_thread.author_channel_url).to be_nil }
+      it { expect(comment_thread.author_channel_id).to be_nil }
       it { expect(comment_thread.like_count).to be_nil }
       it { expect(comment_thread.updated_at).to be_nil }
     end

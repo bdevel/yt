@@ -15,7 +15,8 @@ describe Yt::Comment do
     examples = {
       video_id: {with: 'xyz123', without: nil},
       parent_id: {with: 'abc123', without: nil},
-      text_display: {with: 'awesome', without: nil},
+      text_display: {with: '<b>awesome</b>', without: nil},
+      text_original: {with: '*awesome*', without: nil},
       author_display_name: {with: 'John', without: nil},
       like_count: {with: 10, without: nil},
       updated_at: {input: '2016-03-22T12:56:56.3Z', with: Time.parse('2016-03-22T12:56:56.3Z'), without: nil},

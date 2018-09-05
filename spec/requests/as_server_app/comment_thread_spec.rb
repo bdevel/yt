@@ -15,7 +15,10 @@ describe Yt::CommentThread, :server_app do
 
     it { expect(comment_thread.top_level_comment).to be_a Yt::Comment }
     it { expect(comment_thread.text_display).not_to be_empty }
+    it { expect(comment_thread.text_original).not_to be_empty }
     it { expect(comment_thread.author_display_name).not_to be_empty }
+    it { expect(comment_thread.author_channel_id).not_to be_empty }
+    it { expect(comment_thread.author_channel_url).not_to be_empty }
     it { expect(comment_thread.updated_at).to be_a Time }
     it { expect(comment_thread.like_count).to be_a Integer }
   end

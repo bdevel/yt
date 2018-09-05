@@ -31,13 +31,25 @@ module Yt
       delegate :top_level_comment, to: :snippet
 
       # @!attribute [r] text_display
-      #   @return [String] the top level comment's display text.
+      #   @return [String] the top level comment's display html.
       delegate :text_display, to: :top_level_comment
+      
+      # @!attribute [r] text_original
+      #   @return [String] the comment's original text.
+      delegate :text_original, to: :top_level_comment
 
       # @!attribute [r] author_display_name
       #   @return [String] the top level comment's author name.
       delegate :author_display_name, to: :top_level_comment
 
+      # @!attribute [r] author_channel_id
+      #   @return [String] the ID of the author
+      delegate :author_channel_id, to: :snippet
+
+      # @!attribute [r] author_channel_url
+      #   @return [String] the URL of the author's channel
+      delegate :author_channel_url, to: :snippet
+      
       # @!attribute [r] like_count
       #   @return [String] the top level comment's likes count.
       delegate :like_count, to: :top_level_comment
@@ -45,6 +57,21 @@ module Yt
       # @!attribute [r] updated_at
       #   @return [String] the top level comment's last updated time.
       delegate :updated_at, to: :top_level_comment
+
+      # @!attribute [r] published_at
+      #   @return [String] the top level comment's published time.
+      delegate :published_at, to: :top_level_comment
+
+      
+    ### ASSOCIATIONS ###
+      # @!attribute [r] comment_threads
+      #   @return [Yt::Collections::Comments] this comment thread's sub comments.
+      has_many :comments
+
+      def has_replies?
+        total_reply_count > 0
+      end
+      
     end
   end
 end

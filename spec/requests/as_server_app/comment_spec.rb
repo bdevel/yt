@@ -9,7 +9,10 @@ describe Yt::Comment, :server_app do
 
     it { expect(comment.parent_id).to be_nil }
     it { expect(comment.text_display).to be_a String }
+    it { expect(comment.text_original).to be_a String }
     it { expect(comment.author_display_name).to be_a String }
+    it { expect(comment.author_channel_id).to be_a String }
+    it { expect(comment.author_channel_url).to be_a String }
     it { expect(comment.like_count).to be_a Integer }
     it { expect(comment.updated_at).to be_a Time }
   end

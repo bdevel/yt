@@ -5,9 +5,8 @@ module Yt
     # Provides methods to interact with YouTube comment.
     # @see https://developers.google.com/youtube/v3/docs/comments
     class Comment < Resource
-
+      
     ### SNIPPET ###
-
       # @!attribute [r] video_id
       #   @return [String] the ID of the video that the comment refers to.
       delegate :video_id, to: :snippet
@@ -16,9 +15,21 @@ module Yt
       #   @return [String] the display name of the user who posted the comment.
       delegate :author_display_name, to: :snippet
 
+      # @!attribute [r] author_channel_id
+      #   @return [String] the ID of the author
+      delegate :author_channel_id, to: :snippet
+      
+      # @!attribute [r] author_channel_url
+      #   @return [String] the URL of the author's channel
+      delegate :author_channel_url, to: :snippet
+      
       # @!attribute [r] text_display
-      #   @return [String] the comment's text.
+      #   @return [String] the comment's html.
       delegate :text_display, to: :snippet
+
+      # @!attribute [r] text_original
+      #   @return [String] the comment's original text.
+      delegate :text_original, to: :snippet
 
       # @!attribute [r] parent_id
       #   @return [String] the unique ID of the parent comment. This property is only
@@ -32,6 +43,11 @@ module Yt
       # @!attribute [r] updated_at
       #   @return [Time] the date and time when the comment was last updated.
       delegate :updated_at, to: :snippet
+
+      # @!attribute [r] published_at
+      #   @return [String] the published time.
+      delegate :published_at, to: :snippet
+
     end
   end
 end

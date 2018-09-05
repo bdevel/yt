@@ -33,7 +33,9 @@ module Yt
       has_attribute :video_id
       has_attribute :total_reply_count, type: Integer
       has_attribute :author_display_name
+      has_attribute :author_channel_url
       has_attribute :text_display
+      has_attribute :text_original
       has_attribute :parent_id
       has_attribute :like_count, type: Integer
       has_attribute :updated_at, type: Time
@@ -52,6 +54,12 @@ module Yt
 
       def top_level_comment
         @top_level_comment ||= Yt::Comment.new data['topLevelComment'].symbolize_keys
+      end
+
+      def author_channel_id
+        data.dig("authorChannelId", "value") || # Comment has it here.
+          data.dig("snippet", "authorChannelId", "value") || 
+          data.dig("topLevelComment", "snippet", "authorChannelId", "value") # CommentThreads
       end
 
       # Returns whether YouTube API includes all attributes in this snippet.
